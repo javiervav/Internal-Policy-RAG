@@ -1,9 +1,12 @@
 import pytest
-from app.domain.services.text_chunker import TextChunker
+
+from app.data.services.manual_text_chunker import ManualTextChunker
+
 
 @pytest.fixture
 def chunker():
-    return TextChunker()
+    return ManualTextChunker()
+
 
 def test_chunk_text_should_return_correct_chunks(chunker):
     text = """
@@ -18,7 +21,7 @@ def test_chunk_text_should_return_correct_chunks(chunker):
     """
 
     result = chunker.chunk(text)
-    
+
     assert result == [
         "Title",
         "1. First section\nContent A",

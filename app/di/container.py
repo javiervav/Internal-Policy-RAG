@@ -4,7 +4,7 @@ from app.data.datasources.in_memory_vector_store import InMemoryVectorStore
 from app.data.repositories.vector_store_repository_impl import VectorStoreRepositoryImpl
 from app.data.repositories.document_repository_impl import DocumentRepositoryImpl
 from app.data.services.openai_embedding_service import OpenAIEmbeddingService
-from app.domain.services.text_chunker import TextChunker
+from app.data.services.manual_text_chunker import ManualTextChunker
 from app.domain.usecases.ask_question_use_case import AskQuestionUseCase
 from app.domain.usecases.load_initial_data_use_case import LoadInitialDataUseCase
 
@@ -15,7 +15,7 @@ class Container:
         document_datasource = DocumentLocalFileDatasource()
         document_repository = DocumentRepositoryImpl(document_datasource)
 
-        text_chunker = TextChunker()
+        text_chunker = ManualTextChunker()
 
         embedding_service = OpenAIEmbeddingService(client=AsyncOpenAI())
 
