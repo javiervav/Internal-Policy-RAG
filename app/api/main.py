@@ -20,3 +20,10 @@ async def lifespan(app: FastAPI):
 
 
 app = FastAPI(lifespan=lifespan)
+
+
+@app.post("/ask")
+async def ask(question: str):
+    container: Container = app.state.container
+
+    await container.ask_question_use_case.execute(question)

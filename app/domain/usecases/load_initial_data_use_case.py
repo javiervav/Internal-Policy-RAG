@@ -17,22 +17,22 @@ class LoadInitialDataUseCase:
             text_chunker: TextChunker,
             embedding_service: EmbeddingService,
     ):
-        self.document_repository = document_repository
-        self.text_chunker = text_chunker
-        self.embedding_service = embedding_service
-        self.vector_store_repository = vector_store_repository
+        self._document_repository = document_repository
+        self._text_chunker = text_chunker
+        self._embedding_service = embedding_service
+        self._vector_store_repository = vector_store_repository
 
     async def execute(self):
-        document = await self.document_repository.load_document()
+        document = await self._document_repository.load_document()
 
-        chunks = self.text_chunker.chunk(document)
+        chunks = self._text_chunker.chunk(document)
         logger.info(f"Document split into {len(chunks)} chunks.")
 
-        embeddings = await self.embedding_service.embed(chunks)
+        embeddings = await self._embedding_service.embed_texts(chunks)
         text_embeddings = self._get_text_embeddings(chunks, embeddings)
         logger.info(f"Generated {len(text_embeddings)} embeddings.")
 
-        await self.vector_store_repository.add(text_embeddings)
+        await self._vector_store_repository.add(text_embeddings)
         logger.info(f"Stored {len(text_embeddings)} embeddings in vector store.")
 
     @staticmethod

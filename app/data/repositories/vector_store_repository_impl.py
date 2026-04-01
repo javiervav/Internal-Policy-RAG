@@ -5,8 +5,11 @@ from app.domain.repositories.vector_store_repository import VectorStoreRepositor
 
 class VectorStoreRepositoryImpl(VectorStoreRepository):
 
-    def __init__(self, vector_store: VectorStoreDatasource):
-        self.vector_store = vector_store
+    def __init__(self, vector_store_datasource: VectorStoreDatasource):
+        self._vector_store_datasource = vector_store_datasource
 
     async def add(self, text_embeddings: list[TextEmbedding]) -> None:
-        await self.vector_store.add(text_embeddings)
+        await self._vector_store_datasource.add(text_embeddings)
+
+    async def get_relevant_documents(self, embedded_question: list[float], max_results: int, threshold: float) -> list[str]:
+        return await self._vector_store_datasource.search_similarities(embedded_question, max_results, threshold)

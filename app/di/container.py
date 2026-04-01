@@ -5,24 +5,31 @@ from app.data.repositories.vector_store_repository_impl import VectorStoreReposi
 from app.data.repositories.document_repository_impl import DocumentRepositoryImpl
 from app.data.services.openai_embedding_service import OpenAIEmbeddingService
 from app.domain.services.text_chunker import TextChunker
+from app.domain.usecases.ask_question_use_case import AskQuestionUseCase
 from app.domain.usecases.load_initial_data_use_case import LoadInitialDataUseCase
+
 
 class Container:
 
     def __init__(self):
         document_datasource = DocumentLocalFileDatasource()
         document_repository = DocumentRepositoryImpl(document_datasource)
-        
+
         text_chunker = TextChunker()
-        
+
         embedding_service = OpenAIEmbeddingService(client=AsyncOpenAI())
-        
+
         vector_store_datasource = InMemoryVectorStore()
         vector_store_repository = VectorStoreRepositoryImpl(vector_store_datasource)
-        
+
         self.load_initial_data_use_case = LoadInitialDataUseCase(
             document_repository=document_repository,
             vector_store_repository=vector_store_repository,
             text_chunker=text_chunker,
             embedding_service=embedding_service
+        )
+
+        self.ask_question_use_case = AskQuestionUseCase(
+            embedding_service=embedding_service,
+            vector_store_repository=vector_store_repository,
         )

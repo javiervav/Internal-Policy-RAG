@@ -3,8 +3,9 @@ import re
 
 class TextChunker:
 
+    @staticmethod
     # Divide text into chunks based on section headers (e.g., "1. ", "2. ", etc.)
-    def chunk(self, text: str) -> list[str]:
+    def chunk(text: str) -> list[str]:
         lines = [line.strip() for line in text.split("\n") if line.strip()]
         chunks = []
 

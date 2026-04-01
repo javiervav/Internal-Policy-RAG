@@ -3,6 +3,7 @@ uvicorn==0.42.0
 openai==2.30.0
 python-dotenv==1.2.2
 pypdf==6.9.2
+numpy==2.4.4
 
 # Dev/test
 pytest==9.0.2
