@@ -1,6 +1,6 @@
 import pytest
 
-from app.data.services.manual_text_chunker import ManualTextChunker
+from app.infrastructure.manual_text_chunker import ManualTextChunker
 
 
 @pytest.fixture

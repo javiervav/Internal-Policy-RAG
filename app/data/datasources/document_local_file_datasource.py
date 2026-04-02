@@ -3,7 +3,7 @@ import asyncio
 from pypdf import PdfReader
 from app.data.datasources.document_datasource import DocumentDatasource
 
-DOCUMENT_PATH = Path(__file__).parents[2] / "ingestion" / "Internal Policy.pdf"
+DOCUMENT_PATH = Path(__file__).parents[3] / "documents" / "Internal Policy.pdf"
 
 class DocumentLocalFileDatasource(DocumentDatasource):
     def __init__(self, path: str = DOCUMENT_PATH):
