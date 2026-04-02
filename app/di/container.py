@@ -7,6 +7,7 @@ from app.infrastructure.openai_embedding_service import OpenAIEmbeddingService
 from app.infrastructure.manual_text_chunker import ManualTextChunker
 from app.domain.usecases.ask_question_use_case import AskQuestionUseCase
 from app.domain.usecases.load_initial_data_use_case import LoadInitialDataUseCase
+from app.infrastructure.openai_llm_service import OpenAILLMService
 
 
 class Container:
@@ -18,6 +19,7 @@ class Container:
         text_chunker = ManualTextChunker()
 
         embedding_service = OpenAIEmbeddingService(client=AsyncOpenAI())
+        llm_service = OpenAILLMService(client=AsyncOpenAI(), model="gpt-5-mini")
 
         vector_store_datasource = InMemoryVectorStore()
         vector_store_repository = VectorStoreRepositoryImpl(vector_store_datasource)
@@ -32,4 +34,5 @@ class Container:
         self.ask_question_use_case = AskQuestionUseCase(
             embedding_service=embedding_service,
             vector_store_repository=vector_store_repository,
+            llm_service=llm_service,
         )
