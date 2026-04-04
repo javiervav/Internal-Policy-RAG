@@ -16,3 +16,7 @@ class VectorStoreDatasource(ABC):
             threshold: float,
     ) -> list[str]:
         pass
+
+    @abstractmethod
+    async def is_empty(self) -> bool:
+        pass

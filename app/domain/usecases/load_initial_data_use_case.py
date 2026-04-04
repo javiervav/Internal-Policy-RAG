@@ -23,6 +23,10 @@ class LoadInitialDataUseCase:
         self._vector_store_repository = vector_store_repository
 
     async def execute(self):
+        if not await self._vector_store_repository.is_empty():
+            logger.info("Vector store already populated, skipping data load.")
+            return
+
         document = await self._document_repository.load_document()
 
         chunks = self._text_chunker.chunk(document)

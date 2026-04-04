@@ -1,4 +1,6 @@
 from openai import AsyncOpenAI
+
+from app.data.datasources.chroma_vector_store import ChromaVectorStore
 from app.data.datasources.document_local_file_datasource import DocumentLocalFileDatasource
 from app.data.datasources.in_memory_vector_store import InMemoryVectorStore
 from app.data.repositories.vector_store_repository_impl import VectorStoreRepositoryImpl
@@ -21,7 +23,8 @@ class Container:
         embedding_service = OpenAIEmbeddingService(client=AsyncOpenAI())
         llm_service = OpenAILLMService(client=AsyncOpenAI(), model="gpt-5-mini")
 
-        vector_store_datasource = InMemoryVectorStore()
+        # vector_store_datasource = InMemoryVectorStore()
+        vector_store_datasource = ChromaVectorStore()
         vector_store_repository = VectorStoreRepositoryImpl(vector_store_datasource)
 
         self.load_initial_data_use_case = LoadInitialDataUseCase(

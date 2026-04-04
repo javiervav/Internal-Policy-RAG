@@ -13,6 +13,9 @@ class InMemoryVectorStore(VectorStoreDatasource):
     async def add(self, text_embeddings: list[TextEmbedding]) -> None:
         await asyncio.to_thread(self._add_embeddings, text_embeddings)
 
+    async def is_empty(self) -> bool:
+        return len(self.vectors) == 0
+
     async def search_similarities(
             self,
             embedded_question: list[float],
