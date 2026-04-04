@@ -44,7 +44,8 @@ Implements the repository interfaces defined in the domain.
 
 - **Datasources** — Low-level I/O abstractions:
   - `DocumentLocalFileDatasource` — Reads PDF documents from the local filesystem.
-  - `InMemoryVectorStore` — Stores and retrieves text embeddings in memory using cosine similarity.
+  - `ChromaVectorStore` — Persists embeddings and documents to disk using [Chroma](https://www.trychroma.com/), with cosine similarity as the distance metric. The store survives server restarts, so documents are only indexed once.
+  - `InMemoryVectorStore` — Alternative in-memory implementation using NumPy cosine similarity. Useful for testing or lightweight setups where persistence is not needed.
 - **Repositories** — Implement the domain repository interfaces by composing one or more datasources (`DocumentRepositoryImpl`, `VectorStoreRepositoryImpl`).
 
 ### Infrastructure layer (`app/infrastructure/`)
@@ -73,7 +74,8 @@ The `Container` class wires together all concrete implementations and injects th
 | Web framework | FastAPI + Uvicorn |
 | LLM & Embeddings | OpenAI API |
 | PDF parsing | pypdf |
-| Vector similarity | NumPy (cosine similarity) |
+| Vector store | Chroma (persistent, cosine similarity) |
+| Vector similarity (alt) | NumPy (in-memory) |
 | Testing | pytest + pytest-asyncio |
 
 ## Setup
@@ -93,7 +95,9 @@ The `Container` class wires together all concrete implementations and injects th
    fastapi dev app/api/main.py
    ```
 
-4. Open `http://localhost:8000/docs` in your browser and use the `/ask` endpoint to ask a question.
+4. Open `http://localhost:8000/docs` in your browser and use the `/ask` endpoint to ask a question. Some examples:
+   - Can I use software for personal purposes?
+   - How many vacation days do I have?
 
 ## Running tests
 
