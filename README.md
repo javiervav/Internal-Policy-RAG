@@ -8,13 +8,17 @@ The goal is to enable automated queries on the company's internal manual, levera
 
 On startup, the application loads and indexes the policy documents. Users can then ask natural-language questions via a REST API and receive answers grounded in the document content.
 
+## Screenshot
+
+![UI Screenshot](https://github.com/user-attachments/assets/35197c68-a24a-483a-b27a-9a3c4fab9bee)
+
 ## Architecture
 
-The project follows **Clean Architecture**, which separates concerns into concentric layers. Inner layers define abstractions; outer layers implement them. Dependencies always point inward — outer layers depend on inner ones, never the reverse.
+The project follows **Clean Architecture**.
 
 ```
 app/
-├── api/             # Entry point (outermost layer)
+├── api/             # Entry point
 ├── domain/          # Core business
 │   ├── models/
 │   ├── repositories/
@@ -71,11 +75,11 @@ The `Container` class wires together all concrete implementations and injects th
 
 | Concern | Library |
 | --- | --- |
-| Web framework | FastAPI + Uvicorn |
+| REST API | FastAPI + Uvicorn |
 | LLM & Embeddings | OpenAI API |
 | PDF parsing | pypdf |
 | Vector store | Chroma (persistent, cosine similarity) |
-| Vector similarity (alt) | NumPy (in-memory) |
+| Vector similarity | NumPy (in-memory) |
 | Testing | pytest + pytest-asyncio |
 
 ## Setup
@@ -95,7 +99,7 @@ The `Container` class wires together all concrete implementations and injects th
    fastapi dev app/api/main.py
    ```
 
-4. Open `http://localhost:8000/docs` in your browser and use the `/ask` endpoint to ask a question. Some examples:
+4. Open `http://localhost:8000` in your browser and ask a question. Some examples:
    - Can I use software for personal purposes?
    - How many vacation days do I have?
 
