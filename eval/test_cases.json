@@ -1,0 +1,22 @@
+[
+  {
+    "question": "Can I use company software for personal purposes?",
+    "expected": "Company software and equipment are for work purposes only."
+  },
+  {
+    "question": "How many vacation days do I have per year?",
+    "expected": "Employees have 22 business days of annual leave per year."
+  },
+  {
+    "question": "Can I share confidential information with third parties?",
+    "expected": "Confidential information must not be shared with external parties."
+  },
+  {
+    "question": "What is the remote work policy?",
+    "expected": "Remote work is allowed up to 2 days per week with supervisor approval."
+  },
+  {
+    "question": "What is the company stock price?",
+    "expected": "I don't know"
+  }
+]

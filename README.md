@@ -2,11 +2,14 @@
 
 This project uses a Retrieval-Augmented Generation (RAG) approach to query and extract information from TechSolutions S.L.'s internal policy document.
 
-## Description
+## Features
 
-The goal is to enable automated queries on the company's internal manual, leveraging natural language processing and information retrieval techniques.
-
-On startup, the application loads and indexes the policy documents. Users can then ask natural-language questions via a REST API and receive answers grounded in the document content.
+- Retrieval-Augmented Generation (RAG) over internal documents
+- Clean Architecture with clear separation of concerns
+- Pluggable vector store (Chroma / in-memory)
+- REST API with FastAPI
+- Automated evaluation pipeline (LLM-as-judge)
+- Simple UI for interaction
 
 ## Screenshot
 
@@ -108,3 +111,27 @@ The `Container` class wires together all concrete implementations and injects th
 ```bash
 pytest
 ```
+
+## Evaluation
+
+The `eval/` folder contains a script that measures the quality of the RAG pipeline using an **LLM-as-judge** approach.
+
+For each test case in `eval/test_cases.json`, the script:
+1. Runs the question through the pipeline
+2. Asks `gpt-4o-mini` to score the actual answer against the expected answer (1 = FAIL, 2 = PARTIAL, 3 = PASS)
+3. Prints a report with the result and reason for each question
+
+To run:
+```bash
+PYTHONPATH=. python eval/run_eval.py
+```
+
+Example result:
+```
+Average score: 2.6/3.0 (5 questions)
+```
+
+**Key insight:** The evaluation revealed a failure case where the system returned an empty answer despite relevant information existing in the document. This highlights:
+
+- The importance of retrieval quality (top-k, thresholds)
+- The value of automated evaluation in identifying edge cases

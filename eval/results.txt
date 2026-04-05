@@ -1,0 +1,28 @@
+=== RAG Evaluation Results ===
+
+[PASS] Can I use company software for personal purposes?
+  Expected : Company software and equipment are for work purposes only.
+  Actual   : No. Equipment, software, and office materials are for work purposes only.
+  Reason   : The actual answer accurately conveys the same core message as the expected answer, providing all necessary information.
+
+[PASS] How many vacation days do I have per year?
+  Expected : Employees have 22 business days of annual leave per year.
+  Actual   : 22 business days per year.
+  Reason   : The actual answer is correct and complete, matching the key information provided in the expected answer.
+
+[FAIL] Can I share confidential information with third parties?
+  Expected : Confidential information must not be shared with external parties.
+  Actual   :
+  Reason   : No answer returned.
+
+[PASS] What is the remote work policy?
+  Expected : Remote work is allowed up to 2 days per week with supervisor approval.
+  Actual   : Remote work is allowed up to 2 days per week with supervisor approval.
+  Reason   : The actual answer matches the expected answer exactly, providing complete and correct information.
+
+[PASS] What is the company stock price?
+  Expected : I don't know
+  Actual   : I don't know
+  Reason   : The actual answer matches the expected answer perfectly.
+
+Average score: 2.6/3.0 (5 questions)
