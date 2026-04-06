@@ -87,22 +87,36 @@ The `Container` class wires together all concrete implementations and injects th
 
 ## Setup
 
-1. Install dependencies:
+1. Clone the repository and navigate into it
+
+
+2. Create and activate a virtual environment:
+   ```bash
+   # macOS / Linux
+   python3 -m venv .venv
+   source .venv/bin/activate
+
+   # Windows
+   python -m venv .venv
+   .venv\Scripts\activate
+   ```
+
+3. Install dependencies:
    ```bash
    pip install -r requirements.txt
    ```
 
-2. Create a `.env` file with your OpenAI API key:
+4. Create a `.env` file with your OpenAI API key:
    ```
    OPENAI_API_KEY=your_key_here
    ```
 
-3. Run the server:
+5. Run the server:
    ```bash
    fastapi dev app/api/main.py
    ```
 
-4. Open `http://localhost:8000` in your browser and ask a question. Some examples:
+6. Open `http://localhost:8000` in your browser and ask a question. Some examples:
    - Can I use software for personal purposes?
    - How many vacation days do I have?
 
