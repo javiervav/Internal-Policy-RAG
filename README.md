@@ -15,6 +15,28 @@ This project uses a Retrieval-Augmented Generation (RAG) approach to query and e
 
 ![UI Screenshot](https://github.com/user-attachments/assets/35197c68-a24a-483a-b27a-9a3c4fab9bee)
 
+## RAG Flow
+
+```mermaid
+flowchart TD
+    subgraph Indexing ["Indexing (startup)"]
+        PDF[PDF Document] -->|load & chunk| Chunks[Text Chunks]
+        Chunks -->|embed| Emb[Embeddings]
+        Emb -->|store| VS
+    end
+
+    VS[(Vector Store)]
+
+    subgraph Query
+        Q[User Question] -->|embed| QE[Question Embedding]
+        QE -->|cosine similarity| VS
+        VS -->|top-k chunks| CTX[Context]
+        CTX -->|prompt| LLM[LLM]
+        Q -->|prompt| LLM
+        LLM --> A[Answer]
+    end
+```
+
 ## Architecture
 
 The project follows **Clean Architecture**.
